@@ -2,7 +2,7 @@ package aa_uc2_252390;
 
 /**
  *
- * @author PC WHITE WOLF
+ * @author Leonardo Flores Leyva - 252390
  */
 public class Busqueda {
     
