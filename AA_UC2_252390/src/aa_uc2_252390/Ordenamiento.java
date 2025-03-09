@@ -9,8 +9,38 @@ package aa_uc2_252390;
  */
 public class Ordenamiento {
     
+    /**
+     * Algoritmo de ordenamiento por
+     * inserción (Insertion Sort).
+     * @param a Arreglo de enteros.
+     * @return Arreglo ordenado.
+     */
+    public static int[] insercion(int[] a){
+        int i, j;
+        int key;
+        // asig:1 + comp:n+1 + iter:n = 2n + 2
+        for (i = 1; i < a.length; i++) { 
+            // (asig:1)*n = n
+            j = i;
+            // (asig:1)*n = n
+            key = a[i];
+            // (comp:n+1 + comp:n+1 + comp:n+1 + rest:n+1 = 4n + 4)*n = 4n^2 +4n
+            while(j > 0 && key < a[j-1]){
+                // ((asig:1 + rest:1 = 2)*n)*n = 2n^2
+                a[j] = a[j-1];
+                // ((asig:1 + rest:1 = 2)*n)*n = 2n^2
+                j--;
+            }
+            // (asig:1)*n = n
+            a[j] = key;
+        }
+        return a; // retr:1
+        // Total = 2n + 2 + n + n + 4n^2 + 4n + 2n^2 + 2n^2 + n + 1 = 
+        // 8n^2 + 9n + 3 = O(n^2)
+    } 
     
-    public static void insercion(int[] a){
+    /*
+        // Algoritmo de inserción original del maestro.
         for (int i = 1; i < a.length; i++) {
             int key = a[i]; // elemento llave
             int j = i - 1; // índice j
@@ -20,7 +50,23 @@ public class Ordenamiento {
             }
             a[j+1] = key;
         }
+    */
+    
+    public static void seleccion(int[] a){
+        int n = a.length;
+        for (int i = 0; i < n-1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (a[j] < a[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            int aux = a[minIndex];
+            a[minIndex] = a[i];
+            a[i] = aux;
+        }
     }
+    
     /**
      * Algoritmo de ordenamiento "Burbuja"
      * o BubbleSort.
@@ -36,16 +82,16 @@ public class Ordenamiento {
                     Si el elemento siguiente 
                     es mayor que el elemento actual.
                 */
-                if(a[j]>a[j+1]){ // (comp: 1 + sum: 1 = 2) * n = 2n
+                if(a[j]>a[j+1]){ // ((comp: 1 + sum: 1 = 2)*n)*n = 2n^2
                     //Intercambia ambos elementos.
-                    int aux = a[j]; // (asig: 1) * n = n
-                    a[j] = a[j+1]; // (asig: 1 + sum: 1 = 2) * n = 2n
-                    a[j+1] = aux; // (sum: 1 + asig: 1 = 2) * n = 2n
+                    int aux = a[j]; // ((asig: 1)*n)*n) = n^2
+                    a[j] = a[j+1]; // ((asig: 1 + sum: 1 = 2)*n)*n) = 2n^2
+                    a[j+1] = aux; // ((sum: 1 + asig: 1 = 2)*n)*n = 2n^2
                 }
             }
         }
         return a; // return: 1
-    } // Total = 2n + 2 + 3n^2 + 3n + 2n + n + 2n + 2n = 3n^2 + 12n + 2 = O(n^2)
+    } // Total = 2n + 2 + 3n^2 + 3n + 2n^2 + n^2 + 2n^2 + 2n^2 + 1 = 10n^2 + 3n + 3 = O(n^2)
     
      
     /**

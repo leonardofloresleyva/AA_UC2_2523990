@@ -11,9 +11,9 @@ public class Main {
      */
     public static void main(String[] args) {
         // Arreglo de ejemplo
-        int[] arreglo = {4, 2, 6, 3, 9};
-        // Arreglo ordenado con algoritmo de burbuja.
-        int[] arregloOrdenado = Ordenamiento.burbuja(arreglo);
+        int[] arreglo = {23, 1, 10, 5, 2};
+        // Arreglo ordenado con algoritmo de inserción.
+        int[] arregloOrdenado = Ordenamiento.insercion(arreglo);
         // Escritura de arreglo ordenado.
         Ordenamiento.escribirArreglo(arregloOrdenado);
     }
