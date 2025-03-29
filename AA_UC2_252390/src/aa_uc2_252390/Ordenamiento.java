@@ -52,19 +52,67 @@ public class Ordenamiento {
         }
     */
     
-    public static void seleccion(int[] a){
+    /**
+     * Algoritmo de ordenamiento por selección
+     * (Selection Sort).
+     * @param a Arreglo de números enteros.
+     * @return Arreglo ordenado
+     */
+    public static int[] seleccion(int[] a){
+        // asig: 1
         int n = a.length;
+        // asig: 1 + comp: n+1 + rest: n+1 + incrm: n = 3n + 3
         for (int i = 0; i < n-1; i++) {
+            // asig: (1)*n = n
             int minIndex = i;
+            // (asig: 1 + suma: 1 + comp: n+1 + incrm: n = 2n + 3)*n = 2n^2 + 3n
             for (int j = i + 1; j < n; j++) {
+                // ((comp: 1)*n*n) = n^2
                 if (a[j] < a[minIndex]) {
+                    // ((asig: 1)*n)*n) = n^2
                     minIndex = j;
                 }
             }
-            int aux = a[minIndex];
-            a[minIndex] = a[i];
-            a[i] = aux;
+            int aux = a[minIndex]; // (asig: 1)*n = n
+            a[minIndex] = a[i]; // (asig: 1)*n = n
+            a[i] = aux; // (asig: 1)*n = n
         }
+        return a; // retr: 1
+    } // Total: 1 + 3n + 3 + n + 2n^2 + 3n + n^2 + n^2 + n + n + n + 1 = 4n^2 + 10n + 5 = O(n^2)
+    
+    public static void quickSort(int[]a, int inicio, int fin){
+        
+        if(inicio < fin){
+        // Caso recursivo
+            // Obtener pivote
+            int pivote = particionar(a, inicio, fin);
+            // recursión de la izquierda
+            quickSort(a, inicio, pivote - 1);
+            // recursión de la derecha
+            quickSort(a, pivote + 1, fin);
+        }
+    }
+    
+    private static  int particionar(int[] a, int inicio, int fin){
+        // seleccionar el pivote
+        int pivote = a[fin]; // 1
+        // seleccionamos el índice más pequeño
+        int i = inicio -1; // 2
+        
+        // recorrer todo el arreglo buscando elementos menores al pivote
+        // para intercambiarlos
+        for (int j = inicio; j < fin; j++) {
+            if (a[j] < pivote) {
+                i++;
+                int aux = a[i];
+                a[i] = a[j];
+                a[j] = aux;
+            }
+        }
+        int temp = a[i];
+        a[i] = a[fin];
+        a[fin] = temp;
+        return i;
     }
     
     /**
@@ -129,6 +177,11 @@ public class Ordenamiento {
         return a;
     }
     
+    /**
+     * Método simple que imprime los elementos de un
+     * arreglo
+     * @param a Arreglo de números enteros
+     */
     public static void escribirArreglo(int[] a){
         for (int i = 0; i < a.length; i++)
             System.out.print(a[i] + " ");
