@@ -11,10 +11,15 @@ public class Main {
      */
     public static void main(String[] args) {
         // Arreglo de ejemplo
-        int[] arreglo = {5, 8, 7, 1, 3 , 6};
+        int[] arreglo = {20, 2, 9, 7, 12 , 15, 1, 6, 8};
         // Arreglo ordenado con algoritmo de inserción.
-        int[] arregloOrdenado = Ordenamiento.seleccion(arreglo);
+        int[] arregloOrdenado = Ordenamiento.quickSort(
+                arreglo, 
+                0, 
+                arreglo.length - 1
+        );
         // Escritura de arreglo ordenado.
         Ordenamiento.escribirArreglo(arregloOrdenado);
     }
 }
+

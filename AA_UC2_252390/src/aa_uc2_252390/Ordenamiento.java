@@ -80,40 +80,54 @@ public class Ordenamiento {
         return a; // retr: 1
     } // Total: 1 + 3n + 3 + n + 2n^2 + 3n + n^2 + n^2 + n + n + n + 1 = 4n^2 + 10n + 5 = O(n^2)
     
-    public static void quickSort(int[]a, int inicio, int fin){
-        
+    /**
+     * Algoritmo de ordenamiento QuickSort
+     * (estrategia divide y vencerás).
+     * @param a Arreglo a ordenar
+     * @param inicio Límite inferior
+     * @param fin Límite superior
+     * @return Arreglo ordenado
+     */
+    public static int[] quickSort(int[]a, int inicio, int fin){
+        // comp: 1
         if(inicio < fin){
-        // Caso recursivo
-            // Obtener pivote
+            // (7n + 9) + asig: 1 = 7n + 10
             int pivote = particionar(a, inicio, fin);
-            // recursión de la izquierda
+            // (7n + 11 + rest: 1)/2 = (7n + 12)/2 = 7n/2 + 6
             quickSort(a, inicio, pivote - 1);
-            // recursión de la derecha
+            // (7n + 11 + suma: 1)/2 = (7n + 12)/2 = 7n/2 + 6
             quickSort(a, pivote + 1, fin);
         }
-    }
+        return a; // retr: 1
+    } // Total: log2(7n + 13) = O(nlog2(n))
     
+    /**
+     * Selecciona el pivote y particiona el arreglo a partir
+     * de este, ordenando los elementos menores al pivote 
+     * a su izquierda, y los elementos mayores a su derecha.
+     * @param a Arreglo a particionar.
+     * @param inicio Índice de inicio
+     * @param fin Índice final
+     * @return Índice del pivote
+     */
     private static  int particionar(int[] a, int inicio, int fin){
-        // seleccionar el pivote
-        int pivote = a[fin]; // 1
-        // seleccionamos el índice más pequeño
-        int i = inicio -1; // 2
-        
-        // recorrer todo el arreglo buscando elementos menores al pivote
-        // para intercambiarlos
+        int pivote = a[fin]; // asig: 1
+        int i = inicio - 1; // asig: 1 + rest: 1 = 2
+        // asig: 1 + comp: n + 1 + incr: 1 = 2n + 2
         for (int j = inicio; j < fin; j++) {
+            // (comp: 1)*n = n
             if (a[j] < pivote) {
-                i++;
-                int aux = a[i];
-                a[i] = a[j];
-                a[j] = aux;
+                i++; // (incr: 1)*n = n
+                int aux = a[i]; // (asig: 1)*n = n
+                a[i] = a[j]; // (asig: 1)*n = n
+                a[j] = aux; // (asig: 1)*n = n
             }
         }
-        int temp = a[i];
-        a[i] = a[fin];
-        a[fin] = temp;
-        return i;
-    }
+        int temp = a[i + 1]; // asig: 1
+        a[i + 1] = a[fin]; // asig: 1
+        a[fin] = temp; // asig: 1
+        return i + 1; // retr: 1
+    } // Total: 1 + 2 + 2n + 2 + n + n + n + n + n + 1 + 1 + 1 + 1 = 7n + 9
     
     /**
      * Algoritmo de ordenamiento "Burbuja"
@@ -141,7 +155,6 @@ public class Ordenamiento {
         return a; // return: 1
     } // Total = 2n + 2 + 3n^2 + 3n + 2n^2 + n^2 + 2n^2 + 2n^2 + 1 = 10n^2 + 3n + 3 = O(n^2)
     
-     
     /**
      * Una versión optimizada del algoritmo de
      * ordenamiento Burbuja o BubbleSort.
